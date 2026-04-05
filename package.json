@@ -2,7 +2,7 @@
   "name": "prose-prompt",
   "displayName": "Prose Prompt",
   "description": "Send text selections to AI chat with prose instructions.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "jurajstefanic",
   "license": "MIT",
   "keywords": [
