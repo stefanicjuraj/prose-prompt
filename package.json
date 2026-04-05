@@ -1,0 +1,175 @@
+{
+  "name": "prose-prompt",
+  "displayName": "Prose Prompt",
+  "description": "Send text selections to AI chat with prose instructions.",
+  "version": "0.0.1",
+  "publisher": "jurajstefanic",
+  "license": "MIT",
+  "keywords": [
+    "cursor",
+    "prose",
+    "chat",
+    "ai",
+    "writing",
+    "selection"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stefanicjuraj/prose-prompt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stefanicjuraj/prose-prompt/issues"
+  },
+  "homepage": "https://github.com/stefanicjuraj/prose-prompt#readme",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Prose Prompt",
+      "properties": {
+        "prose-prompt.openChatCommands": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "workbench.action.chat.open",
+            "workbench.action.chat.focusInput"
+          ],
+          "description": "Run in order: the open chat command and focus input."
+        },
+        "prose-prompt.promptDelayMs": {
+          "type": "number",
+          "default": 450,
+          "minimum": 0,
+          "maximum": 5000,
+          "description": "Wait after opening chat before inserting the prompt (ms)."
+        },
+        "prose-prompt.prompts": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {
+            "reword": "Reword the following text for clarity and tone. Preserve meaning. Suggest a concise replacement.",
+            "rephrase": "Rephrase the following text so it reads more naturally. Keep the same meaning and level of formality.",
+            "synonym": "Suggest synonyms or alternative phrasings for the highlighted words. Briefly note nuance if it changes meaning.",
+            "shorten": "Shorten the following text. Preserve meaning and tone. Prefer tighter phrasing; do not drop important nuance.",
+            "expand": "Expand the following text with useful detail, examples, or clarification. Keep the core message unless you flag a risky assumption.",
+            "itemize": "Convert the following text into clear bullet points or numbered steps. Preserve all substantive content.",
+            "oneSentence": "Rewrite the following text as a single clear sentence. Preserve the main point."
+          },
+          "description": "Preset prompt prose instructions prepended before the selection in AI chat."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "prose-prompt.reword",
+        "title": "Reword",
+        "category": "Prose Prompt"
+      },
+      {
+        "command": "prose-prompt.rephrase",
+        "title": "Rephrase",
+        "category": "Prose Prompt"
+      },
+      {
+        "command": "prose-prompt.synonym",
+        "title": "Synonym",
+        "category": "Prose Prompt"
+      },
+      {
+        "command": "prose-prompt.shorten",
+        "title": "Shorten",
+        "category": "Prose Prompt"
+      },
+      {
+        "command": "prose-prompt.expand",
+        "title": "Expand",
+        "category": "Prose Prompt"
+      },
+      {
+        "command": "prose-prompt.itemize",
+        "title": "Itemize",
+        "category": "Prose Prompt"
+      },
+      {
+        "command": "prose-prompt.oneSentence",
+        "title": "One sentence",
+        "category": "Prose Prompt"
+      },
+      {
+        "command": "prose-prompt.pickProfile",
+        "title": "Select prose prompt…",
+        "category": "Prose Prompt"
+      }
+    ],
+    "submenus": [
+      {
+        "id": "prose-prompt.submenu",
+        "label": "Prose in AI chat"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "submenu": "prose-prompt.submenu",
+          "group": "9_prose@1",
+          "when": "editorHasSelection && editorTextFocus"
+        }
+      ],
+      "prose-prompt.submenu": [
+        {
+          "command": "prose-prompt.reword",
+          "group": "1_actions@1"
+        },
+        {
+          "command": "prose-prompt.rephrase",
+          "group": "1_actions@2"
+        },
+        {
+          "command": "prose-prompt.synonym",
+          "group": "1_actions@3"
+        },
+        {
+          "command": "prose-prompt.shorten",
+          "group": "1_actions@4"
+        },
+        {
+          "command": "prose-prompt.expand",
+          "group": "1_actions@5"
+        },
+        {
+          "command": "prose-prompt.itemize",
+          "group": "1_actions@6"
+        },
+        {
+          "command": "prose-prompt.oneSentence",
+          "group": "1_actions@7"
+        },
+        {
+          "command": "prose-prompt.pickProfile",
+          "group": "2_more@1"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.0.0",
+    "typescript": "^5.5.0"
+  }
+}
